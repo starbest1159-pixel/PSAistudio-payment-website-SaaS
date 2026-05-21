@@ -3,16 +3,16 @@
   "mode": "hosted",
   "build": {
     "hugoVersion": "0.157.0",
-    "rubyVersion": "3.4.8",
-    "nodeVersion": "22",
-    "denoVersion": "2.7.1",
+    "rubyVersion": "file",
+    "nodeVersion": "18",
+    "denoVersion": "file",
     "install_command": "npm i",
     "build_command": "npm run build",
-    "preserved_paths": "node_modules/",
-    "includeGit": true,
+    "preserved_paths": "/,node_modules/",
+    "includeGit": false,
     "environment_variables": [],
-    "output_path": "docs/payment-system/README.md",
-    "manually_configure_urls": true,
-    "preserveOutput": true
+    "output_path": "docs/payment-system/07-FRONTEND-REACT.md",
+    "manually_configure_urls": false,
+    "preserveOutput": false
   }
 }
