@@ -1,0 +1,14 @@
+{
+  "name": "@psaipay/db",
+  "version": "1.0.0",
+  "main": "./src/index.ts",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": {
+    "drizzle-orm": "^0.30.0",
+    "postgres": "^3.4.0"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.21.0",
+    "@types/node": "^20.0.0"
+  }
+}
