@@ -11,6 +11,8 @@
     "preserved_paths": "node_modules/",
     "includeGit": true,
     "environment_variables": [],
-    "output_path": "git@github.com:starbest1159-pixel/PSAistudio-payment-website-SaaS.git"
+    "output_path": "docs/payment-system/README.md",
+    "manually_configure_urls": true,
+    "preserveOutput": true
   }
 }
