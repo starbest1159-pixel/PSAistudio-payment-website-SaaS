@@ -1,0 +1,14 @@
+paths:
+  static: ''
+  uploads: uploads
+timezone: Asia/Bangkok
+markdown:
+  engine: commonmark
+  options: {}
+collections_config:
+  pages:
+    path: ''
+    icon: wysiwyg
+  docs_payment_system:
+    path: docs/payment-system
+    icon: body_system
