@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd artifacts/psai-dashboard && npm install && npm run build",
+  "buildCommand": "cd artifacts/psai-dashboard && npm install --legacy-peer-deps && npm run build",
   "outputDirectory": "artifacts/psai-dashboard/dist",
   "nodeVersion": "20"
 }
