@@ -1,24 +1,25 @@
-## ๐“ README - Payment System Documentation
+```
+# 📋 README - Payment System Documentation
 
-**Last Updated:** 2026-05-19  
-**Status:** Production-Ready  
+**Last Updated:** 2026-05-19
+**Status:** Production-Ready
 **Version:** 1.0
 
 ---
 
-## ๐ฏ Quick Start
+## 🎯 Quick Start
 
 This directory contains **comprehensive documentation** for implementing a **complete payment processing system** for a Thai SaaS platform supporting:
 
-- โ… **PromptPay QR Code** (QR-based scanning)
-- โ… **TrueMoney Wallet** (Redirect payment)
-- โ… **Internet/Mobile Banking** (Bank transfer)
+- ✅ **PromptPay QR Code** (QR-based scanning)
+- ✅ **TrueMoney Wallet** (Redirect payment)
+- ✅ **Internet/Mobile Banking** (Bank transfer)
 
 ---
 
-## ๐“ Documentation Files
+## 📚 Documentation Files
 
-### 1. **01-ARCHITECTURE.md** 
+### 1. **01-ARCHITECTURE.md**
 **System Architecture & Design**
 - High-level system overview
 - Component descriptions (Order, Payment, Webhook services)
@@ -26,7 +27,7 @@ This directory contains **comprehensive documentation** for implementing a **com
 - Technology stack
 - Implementation roadmap (12-week)
 
-๐‘ **Start here if you need:** Big picture understanding
+👉 **Start here if you need:** Big picture understanding
 
 ---
 
@@ -38,7 +39,7 @@ This directory contains **comprehensive documentation** for implementing a **com
 - Indexes & optimization strategies
 - Data types & constraints
 
-๐‘ **Start here if you need:** Database setup
+👉 **Start here if you need:** Database setup
 
 ---
 
@@ -50,7 +51,7 @@ This directory contains **comprehensive documentation** for implementing a **com
 - Error handling codes
 - Code examples (JavaScript, Python)
 
-๐‘ **Start here if you need:** API integration
+👉 **Start here if you need:** API integration
 
 ---
 
@@ -62,7 +63,7 @@ This directory contains **comprehensive documentation** for implementing a **com
 - Error handling & retry logic
 - Edge cases & special scenarios
 
-๐‘ **Start here if you need:** Payment flow details
+👉 **Start here if you need:** Payment flow details
 
 ---
 
@@ -76,7 +77,7 @@ This directory contains **comprehensive documentation** for implementing a **com
 - PCI-DSS compliance
 - Pre-production checklist
 
-๐‘ **Start here if you need:** Security implementation
+👉 **Start here if you need:** Security implementation
 
 ---
 
@@ -89,59 +90,59 @@ This directory contains **comprehensive documentation** for implementing a **com
 - Authentication middleware
 - Testing strategies
 
-๐‘ **Start here if you need:** Start coding
+👉 **Start here if you need:** Start coding
 
 ---
 
-## ๐—๏ธ System Architecture at a Glance
+## 🏗️ System Architecture at a Glance
 
 ```
-โ”โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”
-โ”  Frontend (Web/Mobile)              โ”
-โ””โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”ฌโ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”
-                 โ”
-                 โ“
-โ”โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”
-โ”  API Gateway + Rate Limiting        โ”
-โ””โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”ฌโ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”
-                 โ”
-        โ”โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”ดโ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”
-        โ”                 โ”
-        โ“                 โ“
-โ”โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”  โ”โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”
-โ” Order Service โ”  โ”Payment Serviceโ”
-โ”              โ”  โ”  - Create    โ”
-โ” - Create     โ”  โ”  - Verify    โ”
-โ” - Track      โ”  โ”  - Webhook   โ”
-โ””โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”  โ””โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”
-        โ”                 โ”
-        โ””โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”ฌโ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”
-                 โ“
-        โ”โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”
-        โ”  PostgreSQL DB  โ”
-        โ”  + Redis Cache  โ”
-        โ””โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”ฌโ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”
-                 โ”
-        โ”โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”ดโ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”
-        โ”                 โ”
-        โ“                 โ“
-โ”โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”  โ”โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”
-โ”Payment Gatewayโ”  โ”Notification  โ”
-โ”(Omise/2C2P)  โ”  โ”Service       โ”
-โ””โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”  โ””โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”€โ”
+┌─────────────────────────────────────┐
+│  Frontend (Web/Mobile)              │
+└────────────────┬────────────────────┘
+                 │
+                 ↓
+┌─────────────────────────────────────┐
+│  API Gateway + Rate Limiting        │
+└────────────────┬────────────────────┘
+                 │
+        ┌────────┴────────┐
+        │                 │
+        ↓                 ↓
+┌──────────────┐  ┌──────────────┐
+│ Order Service │  │Payment Service│
+│              │  │  - Create    │
+│ - Create     │  │  - Verify    │
+│ - Track      │  │  - Webhook   │
+└──────────────┘  └──────────────┘
+        │                 │
+        └────────┬────────┘
+                 ↓
+        ┌─────────────────┐
+        │  PostgreSQL DB  │
+        │  + Redis Cache  │
+        └────────┬────────┘
+                 │
+        ┌────────┴────────┐
+        │                 │
+        ↓                 ↓
+┌──────────────┐  ┌──────────────┐
+│Payment Gateway│  │Notification  │
+│(Omise/2C2P)  │  │Service       │
+└──────────────┘  └──────────────┘
 ```
 
 ---
 
-## ๐€ Implementation Phases
+## 🚀 Implementation Phases
 
-### Phase 1: Foundation (Week 1-2) โ…
+### Phase 1: Foundation (Week 1-2) ✅
 - [ ] Database schema
 - [ ] API authentication
 - [ ] Order management
 - [ ] Project structure
 
-### Phase 2: Payment Core (Week 3-4) โณ
+### Phase 2: Payment Core (Week 3-4) ⏳
 - [ ] Payment models
 - [ ] Webhook handlers
 - [ ] Signature verification
@@ -173,7 +174,7 @@ This directory contains **comprehensive documentation** for implementing a **com
 
 ---
 
-## ๐ ๏ธ Quick Start Commands
+## 🛠️ Quick Start Commands
 
 ### Database Setup
 ```bash
@@ -224,7 +225,7 @@ curl -X POST http://localhost:3000/api/v1/payments \
 
 ---
 
-## ๐“– Common Use Cases
+## 📖 Common Use Cases
 
 ### "I need to understand the payment flow"
 1. Read **04-PAYMENT-FLOWS.md**
@@ -254,7 +255,7 @@ curl -X POST http://localhost:3000/api/v1/payments \
 
 ---
 
-## ๐” Security Checklist
+## 🔐 Security Checklist
 
 Before going to production, ensure:
 
@@ -271,11 +272,11 @@ Before going to production, ensure:
 - [ ] Backup strategy
 - [ ] Incident response plan
 
-๐‘ **Full checklist in 05-SECURITY.md**
+👉 **Full checklist in 05-SECURITY.md**
 
 ---
 
-## ๐งช Testing Strategy
+## 🧪 Testing Strategy
 
 ### Unit Tests
 ```bash
@@ -309,7 +310,7 @@ owasp-dependency-check --project "Payment System"
 
 ---
 
-## ๐“ Support & FAQ
+## 📞 Support & FAQ
 
 ### Q: Can I use different payment gateway?
 **A:** Yes, the code is designed as abstraction layer. Add new provider by implementing `IPaymentGateway` interface in `06-IMPLEMENTATION.md`.
@@ -331,7 +332,7 @@ owasp-dependency-check --project "Payment System"
 
 ---
 
-## ๐“ Key Metrics
+## 📊 Key Metrics
 
 Track these metrics post-launch:
 
@@ -345,61 +346,61 @@ Track these metrics post-launch:
 
 ---
 
-## ๐“ Files Structure
+## 📝 Files Structure
 
 ```
 docs/payment-system/
-โ”โ”€โ”€ 01-ARCHITECTURE.md          # System design
-โ”โ”€โ”€ 02-DATABASE-SCHEMA.md       # Database design
-โ”โ”€โ”€ 03-API-SPEC.md              # API documentation
-โ”โ”€โ”€ 04-PAYMENT-FLOWS.md         # Payment flows
-โ”โ”€โ”€ 05-SECURITY.md              # Security guide
-โ”โ”€โ”€ 06-IMPLEMENTATION.md        # Code examples
-โ””โ”€โ”€ README.md                   # This file
+├── 01-ARCHITECTURE.md          # System design
+├── 02-DATABASE-SCHEMA.md       # Database design
+├── 03-API-SPEC.md              # API documentation
+├── 04-PAYMENT-FLOWS.md         # Payment flows
+├── 05-SECURITY.md              # Security guide
+├── 06-IMPLEMENTATION.md        # Code examples
+└── README.md                   # This file
 
 src/
-โ”โ”€โ”€ config/
-โ”   โ””โ”€โ”€ database.js
-โ”โ”€โ”€ controllers/
-โ”   โ”โ”€โ”€ orderController.js
-โ”   โ””โ”€โ”€ paymentController.js
-โ”โ”€โ”€ services/
-โ”   โ”โ”€โ”€ PaymentService.js
-โ”   โ”โ”€โ”€ OrderService.js
-โ”   โ””โ”€โ”€ providers/
-โ”       โ”โ”€โ”€ OmiseService.js
-โ”       โ””โ”€โ”€ TwoC2PService.js
-โ”โ”€โ”€ models/
-โ”   โ”โ”€โ”€ Order.js
-โ”   โ”โ”€โ”€ Payment.js
-โ”   โ””โ”€โ”€ Refund.js
-โ”โ”€โ”€ routes/
-โ”   โ”โ”€โ”€ orders.js
-โ”   โ”โ”€โ”€ payments.js
-โ”   โ””โ”€โ”€ webhooks.js
-โ”โ”€โ”€ middleware/
-โ”   โ”โ”€โ”€ auth.js
-โ”   โ”โ”€โ”€ validation.js
-โ”   โ””โ”€โ”€ security.js
-โ””โ”€โ”€ index.js
+├── config/
+│   └── database.js
+├── controllers/
+│   ├── orderController.js
+│   └── paymentController.js
+├── services/
+│   ├── PaymentService.js
+│   ├── OrderService.js
+│   └── providers/
+│       ├── OmiseService.js
+│       └── TwoC2PService.js
+├── models/
+│   ├── Order.js
+│   ├── Payment.js
+│   └── Refund.js
+├── routes/
+│   ├── orders.js
+│   ├── payments.js
+│   └── webhooks.js
+├── middleware/
+│   ├── auth.js
+│   ├── validation.js
+│   └── security.js
+└── index.js
 
 database/
-โ”โ”€โ”€ migrations/
-โ”   โ””โ”€โ”€ 001-init.sql
-โ””โ”€โ”€ seeds/
-    โ””โ”€โ”€ seed.sql
+├── migrations/
+│   └── 001-init.sql
+└── seeds/
+    └── seed.sql
 
 tests/
-โ”โ”€โ”€ unit/
-โ”   โ”โ”€โ”€ services/
-โ”   โ””โ”€โ”€ models/
-โ””โ”€โ”€ integration/
-    โ””โ”€โ”€ api/
+├── unit/
+│   ├── services/
+│   └── models/
+└── integration/
+    └── api/
 ```
 
 ---
 
-## ๐“ Learning Resources
+## 🎓 Learning Resources
 
 ### Payment Concepts
 - [PCI-DSS Overview](https://www.pcisecuritystandards.org/)
@@ -418,15 +419,15 @@ tests/
 
 ---
 
-## ๐“ License & Credits
+## 📄 License & Credits
 
-**Author:** PSAistudio Development Team  
-**Created:** 2026-05-19  
+**Author:** PSAistudio Development Team
+**Created:** 2026-05-19
 **Status:** Production-Ready
 
 ---
 
-## โ๏ธ Questions?
+## ✉️ Questions?
 
 For questions or issues:
 1. Check the relevant documentation file
@@ -436,5 +437,6 @@ For questions or issues:
 
 ---
 
-**Last Updated:** 2026-05-19  
+**Last Updated:** 2026-05-19
 **Next Review:** 2026-06-19
+```
