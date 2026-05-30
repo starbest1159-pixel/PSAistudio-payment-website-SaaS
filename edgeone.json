@@ -1,5 +1,0 @@
-{
-  "buildCommand": "cd packages/dashboard && npm install --legacy-peer-deps && npm run build",
-  "outputDirectory": "packages/dashboard/dist",
-  "nodeVersion": "20"
-}
