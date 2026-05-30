@@ -1,5 +1,5 @@
 {
   "buildCommand": "pnpm install --no-frozen-lockfile && cd packages/dashboard && npx vite build",
   "outputDirectory": "packages/dashboard/dist",
-  "nodeVersion": "20"
+  "nodeVersion": "22"
 }
