@@ -1,0 +1,5 @@
+{
+  "buildCommand": "pnpm install && pnpm --filter @psaipay/dashboard run build",
+  "outputDirectory": "packages/dashboard/dist",
+  "nodeVersion": "20"
+}
