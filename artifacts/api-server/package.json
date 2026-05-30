@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "express": "^5.0.0",
-    "drizzle-orm": "^0.30.0",
+    "drizzle-orm": "^0.45.2",
     "postgres": "^3.4.0",
     "jsonwebtoken": "^9.0.0",
     "bcryptjs": "^2.4.3",
