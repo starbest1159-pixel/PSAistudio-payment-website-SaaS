@@ -2,9 +2,17 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
 export interface AuthRequest extends Request {
-  user?: { username: string; role: string };
+  user?: { username?: string; role: string; merchantId?: string; tenantDbName?: string; email?: string };
+  merchantId?: string;
+  tenantDbName?: string;
+  role?: string;
 }
 
+/**
+ * JWT verification middleware.
+ * After verifying JWT, attaches req.merchantId, req.tenantDbName, req.role to the request.
+ * Falls back to legacy username/role format for backward compatibility.
+ */
 export function requireAuth(req: AuthRequest, res: Response, next: NextFunction) {
   const header = req.headers.authorization;
   if (!header?.startsWith('Bearer ')) {
@@ -12,8 +20,22 @@ export function requireAuth(req: AuthRequest, res: Response, next: NextFunction)
   }
   const token = header.slice(7);
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET || 'secret') as { username: string; role: string };
+    const payload = jwt.verify(token, process.env.JWT_SECRET || 'secret') as {
+      username?: string;
+      role: string;
+      merchantId?: string;
+      tenantDbName?: string;
+      email?: string;
+    };
+
+    // Attach legacy user object
     req.user = payload;
+
+    // Attach multi-tenant fields
+    req.merchantId = payload.merchantId || 'system';
+    req.tenantDbName = payload.tenantDbName || 'system';
+    req.role = payload.role;
+
     next();
   } catch {
     return res.status(401).json({ error: 'Invalid token' });
