@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant User as ผู้ใช้
+    participant Frontend as หน้าเว็บ (Client)
+    participant API as PSAistudio API
+    participant Provider as ผู้ให้บริการชำระเงิน
+    participant Webhook as Webhook Receiver
+    participant Admin as Admin Dashboard
+
+    User->>Frontend: เริ่มชำระเงิน
+    Frontend->>API: สร้าง payment request
+    API-->>Frontend: คืน token/URL
+    Frontend->>Provider: เริ่มกระบวนการชำระ
+    Provider-->>Webhook: ส่งผลลัพธ์ (callback)
+    Webhook->>API: อัพเดตสถานะ
+    API->>Admin: อัพเดตรายการ
+    API-->>Frontend: แจ้งผลกลับ (callback/response)
