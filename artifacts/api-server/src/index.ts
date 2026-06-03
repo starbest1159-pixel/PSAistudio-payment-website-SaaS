@@ -15,6 +15,8 @@ import { slipRouter } from './routes/slip.js';
 import { banksRouter } from './routes/banks.js';
 import { webhooksRouter } from './routes/webhooks.js';
 import { settingsRouter } from './routes/settings.js';
+import { integrationRouter } from './routes/integration.js';
+import { apiKeyAuth } from './middleware/auth.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -37,6 +39,7 @@ app.use('/api/slip', slipRouter);
 app.use('/api/banks', banksRouter);
 app.use('/api/webhooks', webhooksRouter);
 app.use('/api/settings', settingsRouter);
+app.use('/api/integration', apiKeyAuth, integrationRouter);
 
 app.get('/health', (_req, res) => res.json({ status: 'ok', version: '1.0.0' }));
 
