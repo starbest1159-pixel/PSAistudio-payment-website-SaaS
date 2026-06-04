@@ -1,4 +1,4 @@
-import { pgTable, uuid, varchar, numeric, timestamp, text, jsonb } from 'drizzle-orm/pg-core';
+import { pgTable, uuid, varchar, numeric, timestamp, text, jsonb, integer } from 'drizzle-orm/pg-core';
 import { merchants } from './merchants';
 
 export const transactions = pgTable('transactions', {
@@ -11,6 +11,9 @@ export const transactions = pgTable('transactions', {
   reference: varchar('reference', { length: 100 }).unique(),
   description: text('description'),
   metadata: jsonb('metadata'),
+  callbackUrl: text('callback_url'),
+  externalRef: text('external_ref'),
+  webhookAttempts: integer('webhook_attempts').default(0),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),
 });
