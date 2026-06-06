@@ -1,0 +1,19 @@
+{
+  "name": "@psaipay/consolidated",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "ts-node-esm src/server.ts",
+    "build": "pnpm --filter @psaipay/dashboard build && cp -r artifacts/psai-dashboard/dist artifacts/consolidated/public"
+  },
+  "dependencies": {
+    "express": "^5.0.0",
+    "helmet": "^7.0.0",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "ts-node-esm": "^2.0.0",
+    "typescript": "^5.4.0"
+  }
+}
