@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>QR PAY — PromptPay มาตรฐาน BOT (ตัวอย่าง)</title>
+  <link rel="stylesheet" href="/public/qr-pay.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+  <script src="/public/qr-pay.js" defer></script>
+</head>
+<body>
+<div class="app">
+
+  <!-- SHARE PAGE OVERLAY -->
+  <div id="share-page" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="sp-back" id="sp-back">← กลับ</button>
+    <div class="sp-card" id="sp-card">
+      <div style="font-size:.65rem;font-family:var(--mono);letter-spacing:2px;color:var(--muted);margin-bottom:12px">PROMPTPAY · SANDBOX</div>
+      <div class="sp-title" id="sp-title">—</div>
+      <div class="sp-sub"   id="sp-sub">—</div>
+      <div class="sp-amt"   id="sp-amt">—</div>
+      <div class="sp-desc"  id="sp-desc">—</div>
+      <div class="sp-recv" id="sp-recv">
+        <div class="ricon" id="sp-ricon">📱</div>
+        <div>
+          <div class="rname" id="sp-rname">—</div>
+          <div class="rid"   id="sp-rid">—</div>
+        </div>
+        <div class="rtype" id="sp-rtype">—</div>
+      </div>
+      <div id="sp-qrc-wrap"><div id="sp-qrc"></div></div>
+      <div class="sp-hint">📷 สแกน QR ด้วยแอปธนาคาร</div>
+      <div class="sp-cd">
+        <div class="sp-cdlabel">⏱ หมดอายุใน</div>
+        <div class="sp-cdtime" id="sp-cdtime">—</div>
+        <div class="sp-pbar-wrap"><div class="sp-pbar" id="sp-pbar" style="width:100%"></div></div>
+      </div>
+      <div class="sp-exp" id="sp-exp">⛔ QR Code นี้หมดอายุแล้ว</div>
+      <div class="sp-paid" id="sp-paid">
+        <div style="font-size:2rem">✓</div>
+        <div style="color:var(--success);font-weight:700;font-size:.95rem">ชำระเงินสำเร็จแล้ว</div>
+        <div style="color:var(--muted);font-size:.72rem;margin-top:3px;font-family:var(--mono)" id="sp-paidat">—</div>
+      </div>
+      <button class="sp-dl" id="sp-dl">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        ดาวน์โหลด QR Code (PNG)
+      </button>
+      <button class="sp-sim" id="sp-sim-btn">✅ จำลองการชำระเงิน</button>
+    </div>
+  </div>
+
+  <header>
+    <div class="logo"><div class="logo-sq">Q</div><div style="margin-left:8px;font-family:var(--mono);font-weight:700;color:var(--accent)">QR PAY Demo</div></div>
+  </header>
+
+  <main style="padding:28px">
+    <h1>QR PAY — ตัวอย่าง PromptPay (Sandbox)</h1>
+    <p class="sub">ตัวอย่างหน้าแสดง QR สำหรับทดสอบ ใช้งาน standalone page</p>
+
+    <div style="margin-top:18px">
+      <label>เลขอ้างอิง (reference)</label>
+      <input id="input-reference" type="text" placeholder="REF12345" value="REF12345">
+    </div>
+
+    <div style="margin-top:12px">
+      <label>จำนวน (THB)</label>
+      <input id="input-amount" type="number" placeholder="100.00" value="100">
+    </div>
+
+    <div style="margin-top:12px">
+      <button class="btngo" id="btn-generate">สร้าง QR</button>
+      <button class="btn-sim" id="btn-open-share">เปิดหน้าจอแชร์</button>
+    </div>
+
+    <div id="preview" style="margin-top:22px">
+      <div id="preview-qrc-wrap" style="display:inline-block;padding:14px;background:#fff;border-radius:14px;">
+        <div id="preview-qrc"></div>
+      </div>
+    </div>
+  </main>
+
+</div>
+</body>
+</html>
