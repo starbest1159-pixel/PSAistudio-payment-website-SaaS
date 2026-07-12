@@ -1,5 +1,9 @@
 # PSAistudio-payment-website-SaaS
 
+
+<!-- AUTO-PACKAGE-BADGES:START -->
+
+<!-- AUTO-PACKAGE-BADGES:END -->
 **คำอธิบาย:** ระบบชำระเงินภายในเว็บไซต์
 
 ## สรุปสั้น ๆ
