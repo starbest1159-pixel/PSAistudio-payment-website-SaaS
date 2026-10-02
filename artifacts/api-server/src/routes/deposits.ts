@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import crypto from 'crypto';
 import QRCode from 'qrcode';
 import { requireAuth } from '../middleware/auth.js';
 import { generatePromptPayQR } from '../lib/promptpay.js';

@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import crypto from 'crypto';
 import { requireAuth, AuthRequest } from '../middleware/auth.js';
 
 export const banksRouter = Router();
@@ -37,18 +38,13 @@ interface BankConnection {
 
 const connections: BankConnection[] = [];
 
-/**
- * Generate a random verification deposit amount between 0.01 and 0.99 THB
- */
 function generateDepositAmount(): string {
-  const amount = Math.floor(Math.random() * 99) + 1; // 1-99
-  return (amount / 100).toFixed(2); // 0.01-0.99
+  const amount = Math.floor(Math.random() * 99) + 1;
+  return (amount / 100).toFixed(2);
 }
 
-// List available banks
 banksRouter.get('/list', (_req, res) => res.json(THAI_BANKS));
 
-// List connections for current tenant
 banksRouter.get('/connections', (req: AuthRequest, res) => {
   const tenantConnections = req.role === 'admin'
     ? connections
@@ -56,7 +52,6 @@ banksRouter.get('/connections', (req: AuthRequest, res) => {
   res.json(tenantConnections);
 });
 
-// Create connection (tenant-scoped)
 banksRouter.post('/connections', (req: AuthRequest, res) => {
   const { bankCode, accountNumber, accountName } = req.body;
 
@@ -85,28 +80,20 @@ banksRouter.post('/connections', (req: AuthRequest, res) => {
   res.status(201).json(c);
 });
 
-// Delete connection (tenant-scoped)
 banksRouter.delete('/connections/:id', (req: AuthRequest, res) => {
   const conn = connections.find(x => x.id === req.params.id);
   if (!conn) return res.status(404).json({ error: 'Not found' });
-
-  // Tenant can only delete their own connections
   if (req.role !== 'admin' && conn.merchantId !== req.merchantId) {
     return res.status(403).json({ error: 'Forbidden' });
   }
-
   const i = connections.indexOf(conn);
   connections.splice(i, 1);
   res.json({ message: 'Deleted' });
 });
 
-// POST /banks/connections/:id/send-verification
-// Generates a random small deposit amount, sets verificationStatus to 'deposit_sent'
 banksRouter.post('/connections/:id/send-verification', (req: AuthRequest, res) => {
   const conn = connections.find(x => x.id === req.params.id);
   if (!conn) return res.status(404).json({ error: 'Connection not found' });
-
-  // Tenant can only verify their own connections
   if (req.role !== 'admin' && conn.merchantId !== req.merchantId) {
     return res.status(403).json({ error: 'Forbidden' });
   }
@@ -128,8 +115,6 @@ banksRouter.post('/connections/:id/send-verification', (req: AuthRequest, res) =
   });
 });
 
-// POST /banks/connections/:id/confirm-verification
-// Tenant submits the amount they received; if matches → verified; if not → increment attempts
 banksRouter.post('/connections/:id/confirm-verification', (req: AuthRequest, res) => {
   const { amount } = req.body as { amount?: string | number };
   if (amount === undefined || amount === null) {
@@ -138,8 +123,6 @@ banksRouter.post('/connections/:id/confirm-verification', (req: AuthRequest, res
 
   const conn = connections.find(x => x.id === req.params.id);
   if (!conn) return res.status(404).json({ error: 'Connection not found' });
-
-  // Tenant can only verify their own connections
   if (req.role !== 'admin' && conn.merchantId !== req.merchantId) {
     return res.status(403).json({ error: 'Forbidden' });
   }
@@ -148,7 +131,6 @@ banksRouter.post('/connections/:id/confirm-verification', (req: AuthRequest, res
     return res.status(400).json({ error: `Cannot confirm verification for connection with status '${conn.verificationStatus}'` });
   }
 
-  // Compare amounts (both as float for precision within 2 decimal places)
   const submittedAmount = parseFloat(String(amount)).toFixed(2);
   const expectedAmount = parseFloat(conn.verificationDepositAmount!).toFixed(2);
 
@@ -165,7 +147,6 @@ banksRouter.post('/connections/:id/confirm-verification', (req: AuthRequest, res
     });
   }
 
-  // Incorrect amount
   conn.verificationAttempts += 1;
 
   if (conn.verificationAttempts >= 3) {

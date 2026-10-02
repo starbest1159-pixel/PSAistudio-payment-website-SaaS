@@ -1,6 +1,6 @@
-import { Router } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
 
 export const authRouter = Router();
 
@@ -99,17 +99,12 @@ authRouter.post('/login', async (req, res) => {
 
     if (valid) {
       const token = jwt.sign(
-        { username: adminUser, role: 'admin', merchantId: 'system', tenantDbName: 'system', email: adminUser },
+        { username: adminUser, role: 'admin' },
         process.env.JWT_SECRET || 'secret',
         { expiresIn: process.env.JWT_EXPIRES_IN || '8h' }
       );
-      return res.json({ token, username: adminUser, role: 'admin', merchantId: 'system', tenantDbName: 'system' });
+      return res.json({ token, user: { username: adminUser, role: 'admin' } });
     }
-  }
-
-  // 2. Try merchant lookup
-  if (!loginEmail || !password) {
-    return res.status(401).json({ error: 'Invalid credentials' });
   }
 
   const merchant = merchantStore.find(m => m.email === loginEmail);
@@ -117,7 +112,7 @@ authRouter.post('/login', async (req, res) => {
     return res.status(401).json({ error: 'Invalid credentials' });
   }
 
-  const valid = await bcrypt.compare(password, merchant.passwordHash);
+  const valid = await bcrypt.compare(password || '', merchant.passwordHash);
   if (!valid) {
     return res.status(401).json({ error: 'Invalid credentials' });
   }
@@ -128,61 +123,5 @@ authRouter.post('/login', async (req, res) => {
     { expiresIn: process.env.JWT_EXPIRES_IN || '8h' }
   );
 
-  res.json({
-    token,
-    username: merchant.email,
-    role: merchant.role,
-    merchantId: merchant.id,
-    tenantDbName: merchant.tenantDbName,
-    email: merchant.email,
-  });
+  res.json({ token, user: { merchantId: merchant.id, email: merchant.email, role: merchant.role } });
 });
-
-// POST /auth/me — return current user info
-authRouter.post('/me', (req, res) => {
-  const header = req.headers.authorization;
-  if (!header?.startsWith('Bearer ')) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-
-  const token = header.slice(7);
-  try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET || 'secret') as {
-      merchantId?: string;
-      email?: string;
-      tenantDbName?: string;
-      role?: string;
-      username?: string;
-    };
-
-    // Admin user
-    if (payload.role === 'admin') {
-      return res.json({ username: payload.username, role: 'admin', merchantId: 'system', tenantDbName: 'system' });
-    }
-
-    // Merchant user
-    const merchant = merchantStore.find(m => m.id === payload.merchantId);
-    if (!merchant) {
-      return res.status(404).json({ error: 'Merchant not found' });
-    }
-
-    res.json({
-      merchantId: merchant.id,
-      email: merchant.email,
-      name: merchant.name,
-      code: merchant.code,
-      tenantDbName: merchant.tenantDbName,
-      subscriptionStatus: merchant.subscriptionStatus,
-      role: merchant.role,
-    });
-  } catch {
-    return res.status(401).json({ error: 'Invalid token' });
-  }
-});
-
-authRouter.post('/logout', (_req, res) => {
-  res.json({ message: 'Logged out' });
-});
-
-// Export store for use in other modules (e.g., banks router for merchantId lookup)
-export { merchantStore };

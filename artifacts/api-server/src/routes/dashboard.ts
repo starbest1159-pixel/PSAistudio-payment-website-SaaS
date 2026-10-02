@@ -9,7 +9,7 @@ dashboardRouter.get('/kpis', (_req, res) => {
     totalDeposits: 1250000,
     totalWithdrawals: 890000,
     pendingWithdrawals: 12,
-    activemerchants: 45,
+    activeMerchants: 45,
     successRate: 98.5,
     todayVolume: 125000,
     todayTransactions: 342,

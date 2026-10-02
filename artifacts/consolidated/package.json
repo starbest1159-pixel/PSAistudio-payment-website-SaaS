@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "ts-node-esm src/server.ts",
-    "build": "pnpm --filter @psaipay/dashboard build && cp -r artifacts/psai-dashboard/dist artifacts/consolidated/public"
+    "build": "pnpm --filter @psaipay/dashboard build && cp -r artifacts/psai-dashboard/dist artifacts/consolidated/public",
+    "start": "ts-node-esm src/server.ts"
   },
   "dependencies": {
     "express": "^5.0.0",
